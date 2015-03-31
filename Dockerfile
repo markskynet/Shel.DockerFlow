@@ -2,6 +2,7 @@
 FROM ubuntu:14.04
 
 MAINTAINER Sebastian Helzle sebastian@helzle.net
+MAINTAINER Visay Keo visay.keo@typo3.org
 
 # Install packages as per recommendation (https://docs.docker.com/articles/dockerfile_best-practices/)
 # And clean up APT
@@ -10,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php5-cli \
     php5-mysql \
     php5-gd \
+    php5-curl \
     sqlite \
     php5-sqlite \
     && apt-get clean && rm -rf /var/lib/apt/lists/*

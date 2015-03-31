@@ -1,8 +1,8 @@
 # App container which provides the php environment
 app:
   # For development of the image comment out the 'image' line and replace with the next line
-  #build: Packages/Libraries/shel/dockerflow/
-  image: sebobo/shel.dockerflow:latest
+  build: Packages/Libraries/shel/dockerflow/
+  #image: sebobo/shel.dockerflow:latest
   hostname: dockerflow
   domainname: dev
   volumes_from:
@@ -12,6 +12,7 @@ app:
   links:
     - db
     - mail
+    - elasticsearch
 
 # Passive data container which only provides a shared filesystem for the other containers
 data:
@@ -47,3 +48,10 @@ mail:
   image: mailhog/mailhog:latest
   ports:
     - "8025:8025"
+
+elasticsearch:
+  image: elasticsearch:1.4
+  ports:
+    - "9200:9200"
+  volumes:
+    - Packages/Libraries/shel/dockerflow/Configuration/ElasticSearch/config.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
